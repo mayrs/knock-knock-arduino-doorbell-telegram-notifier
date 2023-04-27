@@ -3,6 +3,10 @@
 
 const boolean DEBUG = false;
 
+const boolean ANNOUNCE_UPCOMING_DEEP_SLEEP = true;
+
+const boolean ANNOUNCE_DEEP_SLEEP = true;
+
 const unsigned int RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS = 3300000; // 55 minutes
 
 const unsigned int RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS = 3600000; // 1 hour

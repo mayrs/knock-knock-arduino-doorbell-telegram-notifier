@@ -3,7 +3,7 @@
 
    Please find an in-depth setup in the projects README.md.
 
-   
+
    # Setup credentials
 
    1. Either rename `passwords_template.h` to `passwords.h` or copy its content to a new file named `passwords.h` in the same folder.
@@ -90,7 +90,8 @@ void setup() {
 void loop() {
   unsigned long millisecondsSinceStartOfProgramm = millis();
 
-  bool isDeepSleepAnnouncementRequired = millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement >= RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS;
+  bool isDeepSleepAnnouncementRequired = ANNOUNCE_UPCOMING_DEEP_SLEEP == true &&
+                                         (millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement >= RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS);
   if (isDeepSleepAnnounced == false && isDeepSleepAnnouncementRequired == true) {
     lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement = millisecondsSinceStartOfProgramm;
     loadWearyFaceEmojiIntoBuffer();
@@ -105,10 +106,12 @@ void loop() {
   bool isDeepSleepRequired = millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleep >= RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS;
   if (isDeepSleepRequired == true) {
     lastMillisecondsSinceStartOfProgrammDeepSleep = millisecondsSinceStartOfProgramm;
-    loadSleepingSymbolEmojiIntoBuffer();
-    setupWiFi();
-    notifyViaTelegramBot(messagesBuffer);
-    teardownWiFi();
+    if (ANNOUNCE_DEEP_SLEEP == true) {
+      loadSleepingSymbolEmojiIntoBuffer();
+      setupWiFi();
+      notifyViaTelegramBot(messagesBuffer);
+      teardownWiFi();
+    }
     enterDeepSleep();
   }
 

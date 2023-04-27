@@ -81,6 +81,18 @@ If `true` prints verbose debug statements via serial connection. Useful for find
 
 Default `false`.
 
+#### `ANNOUNCE_UPCOMING_DEEP_SLEEP`
+
+If `true` sends a telegram message after `RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS` announcing the upcoming deep sleep in `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS`.
+
+Default `true`.
+
+#### `ANNOUNCE_DEEP_SLEEP`
+
+If `true` sends a telegram message after `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` announcing the immediate deep sleep.  
+
+Default `true`.
+
 #### `RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS`
 
 The system will remain functional for this time until deep sleep is announced.
