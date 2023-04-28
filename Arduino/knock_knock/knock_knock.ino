@@ -105,7 +105,6 @@ void loop() {
 
   bool isDeepSleepRequired = millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleep >= RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS;
   if (isDeepSleepRequired == true) {
-    lastMillisecondsSinceStartOfProgrammDeepSleep = millisecondsSinceStartOfProgramm;
     if (ANNOUNCE_DEEP_SLEEP == true) {
       loadSleepingSymbolEmojiIntoBuffer();
       setupWiFi();
