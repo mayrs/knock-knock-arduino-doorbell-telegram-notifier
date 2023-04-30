@@ -122,24 +122,27 @@ void loop() {
 }
 
 void serialPrint(String message) {
-  if (DEBUG == true) {
-    Serial.print(message);
+  if (DEBUG == false) {
+    return;
   }
+  Serial.print(message);
 }
 
 void serialPrintln(String message) {
-  if (DEBUG == true) {
-    Serial.println(message);
+  if (DEBUG == false) {
+    return;
   }
+  Serial.println(message);
 }
 
 void setupSerialConnection() {
-  if (DEBUG == true) {
-    Serial.begin(115200);
-    while (!Serial);
-    Serial.flush();
-    serialPrintln("[✓] Setting up serial connection");
+  if (DEBUG == false) {
+    return;
   }
+  Serial.begin(115200);
+  while (!Serial);
+  Serial.flush();
+  serialPrintln("[✓] Setting up serial connection");
 }
 
 void turnWemosD1MiniOnboardLedOff() {
