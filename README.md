@@ -83,13 +83,13 @@ Default `false`.
 
 #### `NOTIFY_UPCOMING_DEEP_SLEEP`
 
-If `true` sends a telegram message after `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS` announcing the upcoming deep sleep in `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS`.
+If `true` sends a Telegram message after `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS` announcing the upcoming deep sleep in `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS`.
 
 Default `true`.
 
 #### `NOTIFY_DEEP_SLEEP`
 
-If `true` sends a telegram message after `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` announcing the immediate deep sleep.  
+If `true` sends a Telegram message after `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` announcing the immediate deep sleep.  
 
 Default `true`.
 
@@ -138,7 +138,7 @@ Default `1 minute`.
 
 #### `NOTIFICATION_RETRIES`
 
-Number of attempts to connect to the telegram server.
+Number of attempts to connect to the Telegram server.
 
 Default `3`.
 
