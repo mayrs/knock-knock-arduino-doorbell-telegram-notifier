@@ -38,7 +38,7 @@ const unsigned int NOTIFICATION_RETRIES = 3;
 const unsigned int SAMPLE_WINDOW_WIDTH_IN_MILLISECONDS = 50;
 
 // https://hester.mtholyoke.edu/idesign/SensorAmp.html
-const float SOUND_THRESHOLD = 973;
+const unsigned int SOUND_THRESHOLD = 973;
 
 // https://unicode.org/emoji/charts/full-emoji-list.html
 const char PROJECT_STARTUP_MESSAGE[] = "👂";

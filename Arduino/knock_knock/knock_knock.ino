@@ -220,8 +220,8 @@ bool notifyViaTelegramBot(const char message[], bool isSilentNotification) {
   return true;
 }
 
-double sampleSoundPeak() {
-  double startMillis = millis();
+int sampleSoundPeak() {
+  unsigned long startMillis = millis();
   int signalMax = 0;
   int signalMin = 1024;
   int sample;
@@ -241,7 +241,7 @@ double sampleSoundPeak() {
 }
 
 bool isDoorbellRinging() {
-  double soundSensed = sampleSoundPeak();
+  int soundSensed = sampleSoundPeak();
   return soundSensed > SOUND_THRESHOLD;
 }
 
