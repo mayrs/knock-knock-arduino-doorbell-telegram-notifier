@@ -50,23 +50,23 @@
 const char* TELEGRAM_API_HOST = "api.telegram.org";
 
 // https://apps.timwhitlock.info/emoji/tables/unicode
-const char EAR_EMOJI[] PROGMEM = "\xF0\x9F\x91\x82";
+const char SYSTEM_STARTUP_MESSAGE[] PROGMEM = "\xF0\x9F\x91\x82";
 /**
   How to create an array of strings in PROGMEM
   https://stackoverflow.com/a/14325519
   https://www.arduino.cc/reference/en/language/variables/utilities/progmem/#_example_code
   https://www.nongnu.org/avr-libc/user-manual/pgmspace.html
 */
-const char KNOCK_KNOCK[] PROGMEM = "Knock Knock";
+const char DOORBELL_RINGING_MESSAGE[] PROGMEM = "Knock Knock";
 char messagesBuffer[10]; // make sure this is large enough for the largest string it must hold
-const char WEARY_FACE_EMOJI[] PROGMEM = "\xF0\x9F\x98\xA9";
-const char SLEEPING_SYMBOL_EMOJI[] PROGMEM = "\xF0\x9F\x92\xA4";
+const char UPCOMING_DEEEP_SLEEP_MESSAGE[] PROGMEM = "\xF0\x9F\x98\xA9";
+const char DEEEP_SLEEP_MESSAGE[] PROGMEM = "\xF0\x9F\x92\xA4";
 
 const char* const MESSAGES[] PROGMEM = {
-  EAR_EMOJI,
-  KNOCK_KNOCK,
-  WEARY_FACE_EMOJI,
-  SLEEPING_SYMBOL_EMOJI,
+  SYSTEM_STARTUP_MESSAGE,
+  DOORBELL_RINGING_MESSAGE,
+  UPCOMING_DEEEP_SLEEP_MESSAGE,
+  DEEEP_SLEEP_MESSAGE,
 };
 
 const int HTTPS_PORT = 443;
@@ -94,7 +94,7 @@ void loop() {
                                          (millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement >= RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS);
   if (isDeepSleepAnnounced == false && isDeepSleepAnnouncementRequired == true) {
     lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement = millisecondsSinceStartOfProgramm;
-    loadWearyFaceEmojiIntoBuffer();
+    loadUpcomingDeepSleepMessageIntoBuffer();
     setupWiFi();
     bool success = notifyViaTelegramBot(messagesBuffer, SILENTLY_NOTIFY_UPCOMING_DEEP_SLEEP);
     if (success == true) {
@@ -106,7 +106,7 @@ void loop() {
   bool isDeepSleepRequired = millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleep >= RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS;
   if (isDeepSleepRequired == true) {
     if (NOTIFY_DEEP_SLEEP == true) {
-      loadSleepingSymbolEmojiIntoBuffer();
+      loadDeepSleepMessageIntoBuffer();
       setupWiFi();
       notifyViaTelegramBot(messagesBuffer, SILENTLY_NOTIFY_DEEP_SLEEP);
       teardownWiFi();
@@ -128,7 +128,7 @@ void loop() {
   }
 
   if (isNotificationRequired == true && isAllowedToNotify == true) {
-    loadKnockKnockIntoBuffer();
+    loadDoorbellRingingMessageIntoBuffer();
     const byte characterLength = strlen(messagesBuffer) + notificationImportanceLevel + 1;
     char knockKnockBuffer[characterLength];
     strcpy(knockKnockBuffer, messagesBuffer);
@@ -186,7 +186,7 @@ void setupSoundSensor() {
 }
 
 void notifyProjectIsRunning() {
-  loadEarEmojiIntoBuffer();
+  loadSystemStartupMessageIntoBuffer();
   setupWiFi();
   notifyViaTelegramBot(messagesBuffer, SILENTLY_NOTIFY_PROJECT_STARTUP);
   teardownWiFi();
@@ -223,19 +223,19 @@ void enterDeepSleep() {
   ESP8266 need to use pgm_read_dword!
   https://www.esp8266.com/viewtopic.php?p=32410#p32410
 */
-void loadEarEmojiIntoBuffer() {
+void loadSystemStartupMessageIntoBuffer() {
   strcpy_P(messagesBuffer, (char*)pgm_read_dword(&MESSAGES[0]));
 }
 
-void loadKnockKnockIntoBuffer() {
+void loadDoorbellRingingMessageIntoBuffer() {
   strcpy_P(messagesBuffer, (char*)pgm_read_dword(&MESSAGES[1]));
 }
 
-void loadWearyFaceEmojiIntoBuffer() {
+void loadUpcomingDeepSleepMessageIntoBuffer() {
   strcpy_P(messagesBuffer, (char*)pgm_read_dword(&MESSAGES[2]));
 }
 
-void loadSleepingSymbolEmojiIntoBuffer() {
+void loadDeepSleepMessageIntoBuffer() {
   strcpy_P(messagesBuffer, (char*)pgm_read_dword(&MESSAGES[3]));
 }
 
