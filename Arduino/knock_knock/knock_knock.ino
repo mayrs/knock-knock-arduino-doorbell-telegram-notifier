@@ -47,7 +47,7 @@
 
 #define SOUND_SENSOR_PIN A0
 
-const char* TELEGRAM_API_HOST = "api.telegram.org";
+const char TELEGRAM_API_HOST[] = "api.telegram.org";
 
 // https://apps.timwhitlock.info/emoji/tables/unicode
 const char PROJECT_STARTUP_MESSAGE[] = "\xF0\x9F\x91\x82"; // `ear` emoji
