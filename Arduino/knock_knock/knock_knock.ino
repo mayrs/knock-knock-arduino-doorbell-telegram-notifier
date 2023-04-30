@@ -55,7 +55,7 @@ const char DOORBELL_RINGING_MESSAGE[] = "Knock Knock";
 const char UPCOMING_DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x98\xA9"; // `weary face` emoji
 const char DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x92\xA4"; // `sleeping symbol` emoji
 
-const int HTTPS_PORT = 443;
+const unsigned int HTTPS_PORT = 443;
 
 bool isDeepSleepAnnounced = false;
 unsigned long lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement = 0;
