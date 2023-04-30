@@ -50,24 +50,10 @@
 const char* TELEGRAM_API_HOST = "api.telegram.org";
 
 // https://apps.timwhitlock.info/emoji/tables/unicode
-const char SYSTEM_STARTUP_MESSAGE[] PROGMEM = "\xF0\x9F\x91\x82";
-/**
-  How to create an array of strings in PROGMEM
-  https://stackoverflow.com/a/14325519
-  https://www.arduino.cc/reference/en/language/variables/utilities/progmem/#_example_code
-  https://www.nongnu.org/avr-libc/user-manual/pgmspace.html
-*/
-const char DOORBELL_RINGING_MESSAGE[] PROGMEM = "Knock Knock";
-char messagesBuffer[10]; // make sure this is large enough for the largest string it must hold
-const char UPCOMING_DEEEP_SLEEP_MESSAGE[] PROGMEM = "\xF0\x9F\x98\xA9";
-const char DEEEP_SLEEP_MESSAGE[] PROGMEM = "\xF0\x9F\x92\xA4";
-
-const char* const MESSAGES[] PROGMEM = {
-  SYSTEM_STARTUP_MESSAGE,
-  DOORBELL_RINGING_MESSAGE,
-  UPCOMING_DEEEP_SLEEP_MESSAGE,
-  DEEEP_SLEEP_MESSAGE,
-};
+const char SYSTEM_STARTUP_MESSAGE[] = "\xF0\x9F\x91\x82";
+const char DOORBELL_RINGING_MESSAGE[] = "Knock Knock";
+const char UPCOMING_DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x98\xA9";
+const char DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x92\xA4";
 
 const int HTTPS_PORT = 443;
 
@@ -94,9 +80,8 @@ void loop() {
                                          (millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement >= RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS);
   if (isDeepSleepAnnounced == false && isDeepSleepAnnouncementRequired == true) {
     lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement = millisecondsSinceStartOfProgramm;
-    loadUpcomingDeepSleepMessageIntoBuffer();
     setupWiFi();
-    bool success = notifyViaTelegramBot(messagesBuffer, SILENTLY_NOTIFY_UPCOMING_DEEP_SLEEP);
+    bool success = notifyViaTelegramBot(UPCOMING_DEEP_SLEEP_MESSAGE, SILENTLY_NOTIFY_UPCOMING_DEEP_SLEEP);
     if (success == true) {
       isDeepSleepAnnounced = true;
     }
@@ -106,9 +91,8 @@ void loop() {
   bool isDeepSleepRequired = millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleep >= RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS;
   if (isDeepSleepRequired == true) {
     if (NOTIFY_DEEP_SLEEP == true) {
-      loadDeepSleepMessageIntoBuffer();
       setupWiFi();
-      notifyViaTelegramBot(messagesBuffer, SILENTLY_NOTIFY_DEEP_SLEEP);
+      notifyViaTelegramBot(DEEP_SLEEP_MESSAGE, SILENTLY_NOTIFY_DEEP_SLEEP);
       teardownWiFi();
     }
     enterDeepSleep();
@@ -128,16 +112,15 @@ void loop() {
   }
 
   if (isNotificationRequired == true && isAllowedToNotify == true) {
-    loadDoorbellRingingMessageIntoBuffer();
-    const byte characterLength = strlen(messagesBuffer) + notificationImportanceLevel + 1;
-    char knockKnockBuffer[characterLength];
-    strcpy(knockKnockBuffer, messagesBuffer);
+    const byte characterLength = strlen(DOORBELL_RINGING_MESSAGE) + notificationImportanceLevel + 1;
+    char messageBuffer[characterLength];
+    strcpy(messageBuffer, DOORBELL_RINGING_MESSAGE);
     for (byte i = 0; i < notificationImportanceLevel; i++) {
-      strcat(knockKnockBuffer, "!");
+      strcat(messageBuffer, "!");
     }
-    knockKnockBuffer[characterLength - 1] = '\0'; // zero-terminated string
+    messageBuffer[characterLength - 1] = '\0'; // zero-terminated string
     setupWiFi();
-    bool success = notifyViaTelegramBot(knockKnockBuffer, SILENTLY_NOTIFY_DOORBELL_RINGING);
+    bool success = notifyViaTelegramBot((const char *)messageBuffer, SILENTLY_NOTIFY_DOORBELL_RINGING);
     teardownWiFi();
     if (success == true) {
       millisecondsSinceStartOfProgrammOfLastNotification = millisecondsSinceStartOfProgramm;
@@ -186,9 +169,8 @@ void setupSoundSensor() {
 }
 
 void notifyProjectIsRunning() {
-  loadSystemStartupMessageIntoBuffer();
   setupWiFi();
-  notifyViaTelegramBot(messagesBuffer, SILENTLY_NOTIFY_PROJECT_STARTUP);
+  notifyViaTelegramBot(SYSTEM_STARTUP_MESSAGE, SILENTLY_NOTIFY_PROJECT_STARTUP);
   teardownWiFi();
 }
 
@@ -216,30 +198,7 @@ void enterDeepSleep() {
   ESP.deepSleep(0);
 }
 
-/**
-  Necessary casts and dereferencing, just copy.
-  https://www.arduino.cc/reference/en/language/variables/utilities/progmem/#_example_code
-
-  ESP8266 need to use pgm_read_dword!
-  https://www.esp8266.com/viewtopic.php?p=32410#p32410
-*/
-void loadSystemStartupMessageIntoBuffer() {
-  strcpy_P(messagesBuffer, (char*)pgm_read_dword(&MESSAGES[0]));
-}
-
-void loadDoorbellRingingMessageIntoBuffer() {
-  strcpy_P(messagesBuffer, (char*)pgm_read_dword(&MESSAGES[1]));
-}
-
-void loadUpcomingDeepSleepMessageIntoBuffer() {
-  strcpy_P(messagesBuffer, (char*)pgm_read_dword(&MESSAGES[2]));
-}
-
-void loadDeepSleepMessageIntoBuffer() {
-  strcpy_P(messagesBuffer, (char*)pgm_read_dword(&MESSAGES[3]));
-}
-
-bool notifyViaTelegramBot(char* message, bool isSilentNotification) {
+bool notifyViaTelegramBot(const char message[], bool isSilentNotification) {
   WiFiClientSecure secureClient;
   secureClient.setInsecure();
   bool isSecureClientConnected = false;
@@ -260,7 +219,7 @@ bool notifyViaTelegramBot(char* message, bool isSilentNotification) {
   }
   serialPrintln(String("[✓] Connecting to \"https://") + TELEGRAM_API_HOST + "\"");
   const String TELEGRAM_BOT_ENDPOINT = String("/bot") + TELEGRAM_BOT_TOKEN + "/sendMessage";
-  const String QUERY_PARAMETERS = String("?chat_id=") + TELEGRAM_CHAT_ID + "&text=" + urlencode(message) + "&disable_notification=" + isSilentNotification;
+  const String QUERY_PARAMETERS = String("?chat_id=") + TELEGRAM_CHAT_ID + "&text=" + urlencode(String(message)) + "&disable_notification=" + isSilentNotification;
   const String REQUEST = String("GET ") + TELEGRAM_BOT_ENDPOINT + QUERY_PARAMETERS + " HTTP/1.1\r\n" + "Host: " + TELEGRAM_API_HOST + "\r\n" + "Connection: close\r\n\r\n";
   secureClient.print(REQUEST);
   secureClient.stop();
