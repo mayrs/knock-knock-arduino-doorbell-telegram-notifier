@@ -81,43 +81,43 @@ If `true` prints verbose debug statements via serial connection. Useful for find
 
 Default `false`.
 
-#### `ANNOUNCE_UPCOMING_DEEP_SLEEP`
+#### `NOTIFY_UPCOMING_DEEP_SLEEP`
 
-If `true` sends a telegram message after `RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS` announcing the upcoming deep sleep in `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS`.
+If `true` sends a telegram message after `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS` announcing the upcoming deep sleep in `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS`.
 
 Default `true`.
 
-#### `ANNOUNCE_DEEP_SLEEP`
+#### `NOTIFY_DEEP_SLEEP`
 
 If `true` sends a telegram message after `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` announcing the immediate deep sleep.  
 
 Default `true`.
 
-#### `SILENTLY_ANNOUNCE_PROJECT_STARTUP`
+#### `SILENTLY_NOTIFY_PROJECT_STARTUP`
 
 If `true` sends the 'project startup' Telegram message silently. Users will receive a notification with no sound.
 
 Default `true`.
 
-#### `SILENTLY_ANNOUNCE_DOORBELL_RINGING`
+#### `SILENTLY_NOTIFY_DOORBELL_RINGING`
 
 If `true` sends the 'doorbell ringing' Telegram message silently. Users will receive a notification with no sound.
 
 Default `false`.
 
-#### `SILENTLY_ANNOUNCE_UPCOMING_DEEP_SLEEP`
+#### `SILENTLY_NOTIFY_UPCOMING_DEEP_SLEEP`
 
-If `true` sends the `ANNOUNCE_UPCOMING_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
-
-Default `false`.
-
-#### `SILENTLY_ANNOUNCE_DEEP_SLEEP`
-
-If `true` sends the `ANNOUNCE_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
+If `true` sends the `NOTIFY_UPCOMING_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
 
 Default `false`.
 
-#### `RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS`
+#### `SILENTLY_NOTIFY_DEEP_SLEEP`
+
+If `true` sends the `NOTIFY_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
+
+Default `false`.
+
+#### `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS`
 
 The system will remain functional for this time until deep sleep is announced.
 
@@ -199,7 +199,7 @@ To anonymize the bot output – and increase the cuteness factor – we use [emo
 2. System **boots** and **broadcasts** readiness via Telegram.
 3. Code **runs**.
    1. It **reports** a **ringing doorbell** via Telegram.
-   2. It **reports** the **upcoming shutdown** after `RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS` of runtime via Telegram.
+   2. It **reports** the **upcoming shutdown** after `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS` of runtime via Telegram.
    3. It **reports** going to **deep sleep** after `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` of runtime via Telegram.
       1. It **goes into deep sleep** after `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` of runtime.
 4. It can be **woken up** from deep sleep via the **push button** (code starts again at #2).

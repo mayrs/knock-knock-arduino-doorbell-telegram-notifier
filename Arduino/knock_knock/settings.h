@@ -3,19 +3,19 @@
 
 const boolean DEBUG = false;
 
-const boolean ANNOUNCE_UPCOMING_DEEP_SLEEP = true;
+const boolean NOTIFY_UPCOMING_DEEP_SLEEP = true;
 
-const boolean ANNOUNCE_DEEP_SLEEP = true;
+const boolean NOTIFY_DEEP_SLEEP = true;
 
-const boolean SILENTLY_ANNOUNCE_PROJECT_STARTUP = true;
+const boolean SILENTLY_NOTIFY_PROJECT_STARTUP = true;
 
-const boolean SILENTLY_ANNOUNCE_DOORBELL_RINGING = false;
+const boolean SILENTLY_NOTIFY_DOORBELL_RINGING = false;
 
-const boolean SILENTLY_ANNOUNCE_UPCOMING_DEEP_SLEEP = false;
+const boolean SILENTLY_NOTIFY_UPCOMING_DEEP_SLEEP = false;
 
-const boolean SILENTLY_ANNOUNCE_DEEP_SLEEP = false;
+const boolean SILENTLY_NOTIFY_DEEP_SLEEP = false;
 
-const unsigned int RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS = 3300000; // 55 minutes
+const unsigned int RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS = 3300000; // 55 minutes
 
 const unsigned int RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS = 3600000; // 1 hour
 

@@ -90,13 +90,13 @@ void setup() {
 void loop() {
   unsigned long millisecondsSinceStartOfProgramm = millis();
 
-  bool isDeepSleepAnnouncementRequired = ANNOUNCE_UPCOMING_DEEP_SLEEP == true &&
-                                         (millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement >= RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS);
+  bool isDeepSleepAnnouncementRequired = NOTIFY_UPCOMING_DEEP_SLEEP == true &&
+                                         (millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement >= RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS);
   if (isDeepSleepAnnounced == false && isDeepSleepAnnouncementRequired == true) {
     lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement = millisecondsSinceStartOfProgramm;
     loadWearyFaceEmojiIntoBuffer();
     setupWiFi();
-    bool success = notifyViaTelegramBot(messagesBuffer, SILENTLY_ANNOUNCE_UPCOMING_DEEP_SLEEP);
+    bool success = notifyViaTelegramBot(messagesBuffer, SILENTLY_NOTIFY_UPCOMING_DEEP_SLEEP);
     if (success == true) {
       isDeepSleepAnnounced = true;
     }
@@ -105,10 +105,10 @@ void loop() {
 
   bool isDeepSleepRequired = millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleep >= RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS;
   if (isDeepSleepRequired == true) {
-    if (ANNOUNCE_DEEP_SLEEP == true) {
+    if (NOTIFY_DEEP_SLEEP == true) {
       loadSleepingSymbolEmojiIntoBuffer();
       setupWiFi();
-      notifyViaTelegramBot(messagesBuffer, SILENTLY_ANNOUNCE_DEEP_SLEEP);
+      notifyViaTelegramBot(messagesBuffer, SILENTLY_NOTIFY_DEEP_SLEEP);
       teardownWiFi();
     }
     enterDeepSleep();
@@ -137,7 +137,7 @@ void loop() {
     }
     knockKnockBuffer[characterLength - 1] = '\0'; // zero-terminated string
     setupWiFi();
-    bool success = notifyViaTelegramBot(knockKnockBuffer, SILENTLY_ANNOUNCE_DOORBELL_RINGING);
+    bool success = notifyViaTelegramBot(knockKnockBuffer, SILENTLY_NOTIFY_DOORBELL_RINGING);
     teardownWiFi();
     if (success == true) {
       millisecondsSinceStartOfProgrammOfLastNotification = millisecondsSinceStartOfProgramm;
@@ -188,7 +188,7 @@ void setupSoundSensor() {
 void notifyProjectIsRunning() {
   loadEarEmojiIntoBuffer();
   setupWiFi();
-  notifyViaTelegramBot(messagesBuffer, SILENTLY_ANNOUNCE_PROJECT_STARTUP);
+  notifyViaTelegramBot(messagesBuffer, SILENTLY_NOTIFY_PROJECT_STARTUP);
   teardownWiFi();
 }
 
