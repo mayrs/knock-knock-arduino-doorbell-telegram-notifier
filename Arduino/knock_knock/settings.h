@@ -41,12 +41,12 @@ const unsigned int SAMPLE_WINDOW_WIDTH_IN_MILLISECONDS = 50;
 const float SOUND_THRESHOLD = 973;
 
 // https://unicode.org/emoji/charts/full-emoji-list.html
-const char PROJECT_STARTUP_MESSAGE[] = "\xF0\x9F\x91\x82"; // `ear` emoji
+const char PROJECT_STARTUP_MESSAGE[] = "👂";
 
 const char DOORBELL_RINGING_MESSAGE[] = "Knock Knock";
 
-const char UPCOMING_DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x98\xA9"; // `sleeping face` emoji
+const char UPCOMING_DEEP_SLEEP_MESSAGE[] = "😴";
 
-const char DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x92\xA4"; // `ZZZ` emoji
+const char DEEP_SLEEP_MESSAGE[] = "💤";
 
 #endif

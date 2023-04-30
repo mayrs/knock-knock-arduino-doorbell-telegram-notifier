@@ -158,7 +158,7 @@ Default `973`.
 
 The message being sent via the Telegram bot when the project is ready.
 
-Default `\xF0\x9F\x91\x82` (👂 emoji).
+Default `👂`.
 
 #### `DOORBELL_RINGING_MESSAGE`
 
@@ -170,13 +170,13 @@ Default `Knock Knock`.
 
 The message being sent via the Telegram bot notifying that deep sleep starts in `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` - `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS`.
 
-Default `\xF0\x9F\x98\xA9` (😴 emoji).
+Default `😴`.
 
 #### `DEEP_SLEEP_MESSAGE`
 
 The message being sent via the Telegram bot when the project is going into deep sleep after `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS`.
 
-Default `\xF0\x9F\x92\xA4` (💤 emoji).
+Default `💤`.
 
 ### Flashing the code
 
