@@ -50,10 +50,10 @@
 const char* TELEGRAM_API_HOST = "api.telegram.org";
 
 // https://apps.timwhitlock.info/emoji/tables/unicode
-const char PROJECT_STARTUP_MESSAGE[] = "\xF0\x9F\x91\x82";
+const char PROJECT_STARTUP_MESSAGE[] = "\xF0\x9F\x91\x82"; // `ear` emoji
 const char DOORBELL_RINGING_MESSAGE[] = "Knock Knock";
-const char UPCOMING_DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x98\xA9";
-const char DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x92\xA4";
+const char UPCOMING_DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x98\xA9"; // `weary face` emoji
+const char DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x92\xA4"; // `sleeping symbol` emoji
 
 const int HTTPS_PORT = 443;
 
