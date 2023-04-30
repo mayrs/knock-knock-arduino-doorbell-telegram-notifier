@@ -50,7 +50,7 @@
 const char* TELEGRAM_API_HOST = "api.telegram.org";
 
 // https://apps.timwhitlock.info/emoji/tables/unicode
-const char SYSTEM_STARTUP_MESSAGE[] = "\xF0\x9F\x91\x82";
+const char PROJECT_STARTUP_MESSAGE[] = "\xF0\x9F\x91\x82";
 const char DOORBELL_RINGING_MESSAGE[] = "Knock Knock";
 const char UPCOMING_DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x98\xA9";
 const char DEEP_SLEEP_MESSAGE[] = "\xF0\x9F\x92\xA4";
@@ -70,7 +70,7 @@ void setup() {
   serialPrintln("[i] Waking up Knock Knock");
   setupWemosD1MiniOnboardLed();
   setupSoundSensor();
-  notifyProjectIsRunning();
+  notifyProjectStartup();
 }
 
 void loop() {
@@ -168,9 +168,9 @@ void setupSoundSensor() {
   serialPrintln("[✓] Setting up sound sensor");
 }
 
-void notifyProjectIsRunning() {
+void notifyProjectStartup() {
   setupWiFi();
-  notifyViaTelegramBot(SYSTEM_STARTUP_MESSAGE, SILENTLY_NOTIFY_PROJECT_STARTUP);
+  notifyViaTelegramBot(PROJECT_STARTUP_MESSAGE, SILENTLY_NOTIFY_PROJECT_STARTUP);
   teardownWiFi();
 }
 
