@@ -93,6 +93,30 @@ If `true` sends a telegram message after `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECO
 
 Default `true`.
 
+#### `SILENTLY_ANNOUNCE_PROJECT_STARTUP`
+
+If `true` sends the 'project startup' Telegram message silently. Users will receive a notification with no sound.
+
+Default `true`.
+
+#### `SILENTLY_ANNOUNCE_DOORBELL_RINGING`
+
+If `true` sends the 'doorbell ringing' Telegram message silently. Users will receive a notification with no sound.
+
+Default `false`.
+
+#### `SILENTLY_ANNOUNCE_UPCOMING_DEEP_SLEEP`
+
+If `true` sends the `ANNOUNCE_UPCOMING_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
+
+Default `false`.
+
+#### `SILENTLY_ANNOUNCE_DEEP_SLEEP`
+
+If `true` sends the `ANNOUNCE_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
+
+Default `false`.
+
 #### `RUNTIME_BEFORE_DEEP_SLEEP_ANNOUNCEMENT_IN_MILLISECONDS`
 
 The system will remain functional for this time until deep sleep is announced.

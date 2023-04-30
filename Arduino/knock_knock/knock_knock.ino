@@ -96,7 +96,7 @@ void loop() {
     lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement = millisecondsSinceStartOfProgramm;
     loadWearyFaceEmojiIntoBuffer();
     setupWiFi();
-    bool success = notifyViaTelegramBot(messagesBuffer);
+    bool success = notifyViaTelegramBot(messagesBuffer, SILENTLY_ANNOUNCE_UPCOMING_DEEP_SLEEP);
     if (success == true) {
       isDeepSleepAnnounced = true;
     }
@@ -108,7 +108,7 @@ void loop() {
     if (ANNOUNCE_DEEP_SLEEP == true) {
       loadSleepingSymbolEmojiIntoBuffer();
       setupWiFi();
-      notifyViaTelegramBot(messagesBuffer);
+      notifyViaTelegramBot(messagesBuffer, SILENTLY_ANNOUNCE_DEEP_SLEEP);
       teardownWiFi();
     }
     enterDeepSleep();
@@ -137,7 +137,7 @@ void loop() {
     }
     knockKnockBuffer[characterLength - 1] = '\0'; // zero-terminated string
     setupWiFi();
-    bool success = notifyViaTelegramBot(knockKnockBuffer);
+    bool success = notifyViaTelegramBot(knockKnockBuffer, SILENTLY_ANNOUNCE_DOORBELL_RINGING);
     teardownWiFi();
     if (success == true) {
       millisecondsSinceStartOfProgrammOfLastNotification = millisecondsSinceStartOfProgramm;
@@ -188,7 +188,7 @@ void setupSoundSensor() {
 void notifyProjectIsRunning() {
   loadEarEmojiIntoBuffer();
   setupWiFi();
-  notifyViaTelegramBot(messagesBuffer);
+  notifyViaTelegramBot(messagesBuffer, SILENTLY_ANNOUNCE_PROJECT_STARTUP);
   teardownWiFi();
 }
 
@@ -239,7 +239,7 @@ void loadSleepingSymbolEmojiIntoBuffer() {
   strcpy_P(messagesBuffer, (char*)pgm_read_dword(&MESSAGES[3]));
 }
 
-bool notifyViaTelegramBot(char* message) {
+bool notifyViaTelegramBot(char* message, bool isSilentNotification) {
   WiFiClientSecure secureClient;
   secureClient.setInsecure();
   bool isSecureClientConnected = false;
@@ -259,8 +259,9 @@ bool notifyViaTelegramBot(char* message) {
     return false;
   }
   serialPrintln(String("[✓] Connecting to \"https://") + TELEGRAM_API_HOST + "\"");
-  const String TELEGRAM_BOT_ENDPOINT = String("/bot") + TELEGRAM_BOT_TOKEN + "/sendMessage?chat_id=" + TELEGRAM_CHAT_ID + "&text=";
-  const String REQUEST = String("GET ") + TELEGRAM_BOT_ENDPOINT + urlencode(message) + " HTTP/1.1\r\n" + "Host: " + TELEGRAM_API_HOST + "\r\n" + "Connection: close\r\n\r\n";
+  const String TELEGRAM_BOT_ENDPOINT = String("/bot") + TELEGRAM_BOT_TOKEN + "/sendMessage";
+  const String QUERY_PARAMETERS = String("?chat_id=") + TELEGRAM_CHAT_ID + "&text=" + urlencode(message) + "&disable_notification=" + isSilentNotification;
+  const String REQUEST = String("GET ") + TELEGRAM_BOT_ENDPOINT + QUERY_PARAMETERS + " HTTP/1.1\r\n" + "Host: " + TELEGRAM_API_HOST + "\r\n" + "Connection: close\r\n\r\n";
   secureClient.print(REQUEST);
   secureClient.stop();
   serialPrintln(String("[✓] Sending message \"") + message + "\"");
