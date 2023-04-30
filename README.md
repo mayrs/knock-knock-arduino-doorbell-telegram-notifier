@@ -154,6 +154,30 @@ If this value is exceeded we assume that the doorbell rings. You might want to t
 
 Default `973`.
 
+#### `PROJECT_STARTUP_MESSAGE`
+
+The message being sent via the Telegram bot when the project is ready.
+
+Default `\xF0\x9F\x91\x82` (👂 emoji).
+
+#### `DOORBELL_RINGING_MESSAGE`
+
+The message being sent via the Telegram bot when the doorbell rings.
+
+Default `Knock Knock`.
+
+#### `UPCOMING_DEEP_SLEEP_MESSAGE`
+
+The message being sent via the Telegram bot notifying that deep sleep starts in `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` - `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS`.
+
+Default `\xF0\x9F\x98\xA9` (😩 emoji).
+
+#### `DEEP_SLEEP_MESSAGE`
+
+The message being sent via the Telegram bot when the project is going into deep sleep after `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS`.
+
+Default `\xF0\x9F\x92\xA4` (💤 emoji).
+
 ### Flashing the code
 
 1. **Download** and **install** the latest release of [Arduino IDE](https://www.arduino.cc/en/software).
