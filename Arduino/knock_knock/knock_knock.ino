@@ -68,7 +68,6 @@ void setup() {
 
 void loop() {
   unsigned long millisecondsSinceStartOfProgramm = millis();
-
   bool isDeepSleepAnnouncementRequired = NOTIFY_UPCOMING_DEEP_SLEEP == true &&
                                          (millisecondsSinceStartOfProgramm - lastMillisecondsSinceStartOfProgrammDeepSleepAnnouncement >= RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS);
   if (isDeepSleepAnnounced == false && isDeepSleepAnnouncementRequired == true) {
@@ -93,7 +92,6 @@ void loop() {
 
   isAllowedToNotify = millisecondsSinceStartOfProgrammOfLastNotification == 0
                       || millisecondsSinceStartOfProgramm - millisecondsSinceStartOfProgrammOfLastNotification > NOTIFICATION_LOCK_IN_MILLISECONDS;
-
   bool isNotificationRequired = isDoorbellRinging();
   if (isNotificationRequired == true) {
     serialPrintln("[i] Doorbell is ringing");
@@ -225,7 +223,6 @@ int sampleSoundPeak() {
   int signalMax = 0;
   int signalMin = 1024;
   int sample;
-
   while ((millis() - startMillis) < SAMPLE_WINDOW_WIDTH_IN_MILLISECONDS) {
     sample = analogRead(SOUND_SENSOR_PIN);
     if (sample < 1024) {
