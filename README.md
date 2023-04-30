@@ -170,7 +170,7 @@ Default `Knock Knock`.
 
 The message being sent via the Telegram bot notifying that deep sleep starts in `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` - `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS`.
 
-Default `\xF0\x9F\x98\xA9` (😩 emoji).
+Default `\xF0\x9F\x98\xA9` (😴 emoji).
 
 #### `DEEP_SLEEP_MESSAGE`
 
