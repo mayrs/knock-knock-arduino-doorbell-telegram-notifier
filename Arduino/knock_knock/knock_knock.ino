@@ -238,8 +238,7 @@ int sampleSoundPeak() {
 }
 
 bool isDoorbellRinging() {
-  int soundSensed = sampleSoundPeak();
-  return soundSensed > SOUND_THRESHOLD;
+  return sampleSoundPeak() > SOUND_THRESHOLD;
 }
 
 // https://github.com/zenmanenergy/ESP8266-Arduino-Examples/blob/master/helloWorld_urlencoded/urlencode.ino
