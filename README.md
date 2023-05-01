@@ -95,31 +95,31 @@ Default `true`.
 
 #### `SILENTLY_NOTIFY_PROJECT_STARTUP`
 
-If `true` sends the 'project startup' Telegram message silently. Users will receive a notification with no sound.
+If `true` sends the `PROJECT_STARTUP_MESSAGE` silently. Users will receive a notification with no sound.
 
 Default `true`.
 
 #### `SILENTLY_NOTIFY_DOORBELL_RINGING`
 
-If `true` sends the 'doorbell ringing' Telegram message silently. Users will receive a notification with no sound.
+If `true` sends the `DOORBELL_RINGING_MESSAGE` silently. Users will receive a notification with no sound.
 
 Default `false`.
 
 #### `SILENTLY_NOTIFY_UPCOMING_DEEP_SLEEP`
 
-If `true` sends the `NOTIFY_UPCOMING_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
+If `true` sends the `UPCOMING_DEEP_SLEEP_MESSAGE` silently. Users will receive a notification with no sound.
 
 Default `false`.
 
 #### `SILENTLY_NOTIFY_DEEP_SLEEP`
 
-If `true` sends the `NOTIFY_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
+If `true` sends the `DEEP_SLEEP_MESSAGE` silently. Users will receive a notification with no sound.
 
 Default `false`.
 
 #### `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS`
 
-The system will remain functional for this time until deep sleep is announced.
+The system is going to announce deep sleep after this amount of time. It will remain functional until `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` is reached. Must be smaller than `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS`.
 
 Default `55 minutes`.
 
