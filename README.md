@@ -95,31 +95,31 @@ Default `true`.
 
 #### `SILENTLY_NOTIFY_PROJECT_STARTUP`
 
-If `true` sends the 'project startup' Telegram message silently. Users will receive a notification with no sound.
+If `true` sends the `PROJECT_STARTUP_MESSAGE` silently. Users will receive a notification with no sound.
 
 Default `true`.
 
 #### `SILENTLY_NOTIFY_DOORBELL_RINGING`
 
-If `true` sends the 'doorbell ringing' Telegram message silently. Users will receive a notification with no sound.
+If `true` sends the `DOORBELL_RINGING_MESSAGE` silently. Users will receive a notification with no sound.
 
 Default `false`.
 
 #### `SILENTLY_NOTIFY_UPCOMING_DEEP_SLEEP`
 
-If `true` sends the `NOTIFY_UPCOMING_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
+If `true` sends the `UPCOMING_DEEP_SLEEP_MESSAGE` silently. Users will receive a notification with no sound.
 
 Default `false`.
 
 #### `SILENTLY_NOTIFY_DEEP_SLEEP`
 
-If `true` sends the `NOTIFY_DEEP_SLEEP` Telegram message silently. Users will receive a notification with no sound.
+If `true` sends the `DEEP_SLEEP_MESSAGE` silently. Users will receive a notification with no sound.
 
 Default `false`.
 
 #### `RUNTIME_BEFORE_UPCOMING_DEEP_SLEEP_NOTIFICATION_IN_MILLISECONDS`
 
-The system will remain functional for this time until deep sleep is announced.
+The system is going to announce deep sleep after this amount of time. It will remain functional until `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS` is reached. Must be smaller than `RUNTIME_BEFORE_DEEP_SLEEP_IN_MILLISECONDS`.
 
 Default `55 minutes`.
 
@@ -194,11 +194,11 @@ Default `💤`.
 
 The bot (`@<NAME>Bot`) can be found by **any** Telegram user. It exposes no methods to the public so there is **no interaction** with other users. By using the bot [`Token`](https://core.telegram.org/bots/api#authorizing-your-bot) we can send messages to certain channels in the name of the bot. Again, this data will **never be shared** with other users.
 
-To anonymize the bot output – and increase the cuteness factor – we use [emojis](https://apps.timwhitlock.info/emoji/tables/unicode).
+To anonymize the bot output even further – and increase the cuteness factor – we use [emojis](https://unicode.org/emoji/charts/full-emoji-list.html).
 
 #### System startup
 
-`ear` emoji.
+👂 emoji.
 
 #### Doorbell detected
 
@@ -211,11 +211,11 @@ To anonymize the bot output – and increase the cuteness factor – we use [emo
 
 #### System preparing for deep sleep
 
-`weary face` emoji.
+😴 emoji.
 
 #### System about to enable deep sleep
 
-`sleeping symbol` emoji.
+💤 emoji.
 
 ### Program flow
 
